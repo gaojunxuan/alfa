@@ -1,0 +1,22 @@
+Package: alfa
+Type: Package
+Title: alfa - Alignment-free analysis tool
+Version: 0.1.0
+Author: Kevin Gao
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: alfa (Alignment-free analysis) 
+    will be an R package for carrying out comparative genomic analysis using
+    alignment-free methods. The tool will rely on k-mer based methods and
+    different metrics to compute the similarity/dissimilarity given a set of
+    sequences. The result can then be plotted as a heatmap or used to construct
+    phylogenetic trees.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ape,
+    Biostrings,
+    stats
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
