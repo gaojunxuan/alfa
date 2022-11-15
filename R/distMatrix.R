@@ -54,5 +54,5 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
 
 plotPairwiseDist <- function(dnaSet, metric = "euclidean", k = 10, ...) {
   distMat <- alfa::createDistanceMatrix(dnaSet, metric, k)
-  plot(distMat, ...)
+  heatmap(distMat, ...)
 }
