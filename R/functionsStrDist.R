@@ -16,6 +16,18 @@ allKMers <- function(str, k) {
   return(kmers)
 }
 
+#' Create a count vector of k-mers in the two strings
+#'
+#' @param str1 the first string
+#' @param str2 the second string
+#' @param k size of k-mer
+#'
+#' @return a list containing two count vectors
+#'
+#' @examples
+#' alfa::countVectors("ATGTGAC", "ATGACTT", 3)
+#'
+#' @export
 countVectors <- function(str1, str2, k) {
   stopifnot(k >= 1)
   stopifnot(is.character(str1), length(str1) <= 1)
@@ -35,9 +47,16 @@ countVectors <- function(str1, str2, k) {
 #' @param str2 the second string
 #' @param k size of k-mers
 #'
-#' @export
-#'
 #' @return the Euclidean distance between str1 and str2
+#'
+#' @examples
+#' alfa::euclideanDistance("ATCATC", "ATTATC", 3)
+#'
+#' @references
+#' Zielezinski, A., Vinga, S., Almeida, J. et al. Alignment-free sequence
+#' comparison: benefits, applications, and tools. Genome Biol 18, 186 (2017).
+#'
+#' @export
 euclideanDistance <- function(str1, str2, k) {
   vecs <- alfa::countVectors(str1, str2, k)
   stopifnot(length(vecs) == 2)
@@ -50,6 +69,10 @@ euclideanDistance <- function(str1, str2, k) {
 #' Calculate the Euclidean distance between two strings
 #' using pre-computed values
 #'
+#' @param countVec1 the precomputed count vector for str1
+#' @param countVec2 the precomputed count vector for str2
+#'
+#' @return the Euclidean distance between countVec1 and countVec2
 fastEuclideanDistance <- function(countVec1, countVec2) {
   return(dist(rbind(countVec1, countVec2))[1])
 }
@@ -61,9 +84,17 @@ fastEuclideanDistance <- function(countVec1, countVec2) {
 #' @param str2 the second string
 #' @param k size of k-mers
 #'
-#' @export
-#'
 #' @return the standardized Euclidean distance between str1 and str2
+#'
+#' @examples
+#' alfa::standardizedEuclidean("ACAATC", "ACATAA", 3)
+#'
+#' @references
+#' Wu TJ, Burke JP, Davison DB. A measure of DNA sequence dissimilarity
+#' based on Mahalanobis distance between frequencies of words.
+#' Biometrics. 1997 Dec;53(4):1431-9. PMID: 9423258.
+#'
+#' @export
 standardizedEuclidean <- function(str1, str2, k) {
   vecs <- alfa::standardizedFreq(str1, str2, k)
   stopifnot(length(vecs) == 2)
@@ -79,8 +110,6 @@ standardizedEuclidean <- function(str1, str2, k) {
 #' @param str1 the first string
 #' @param str2 the second string
 #' @param k size of k-mers
-#'
-#' @export
 #'
 #' @return the standardized Euclidean distance between str1 and str2
 fastStdEuclideanDistance <- function(countVec1, countVec2, str1Len, str2Len,
@@ -105,8 +134,6 @@ normCompressionDistance <- function(str1, str2, k) {
 #' @param str1 the first string
 #' @param str2 the second string
 #' @param k size of k-mers
-#'
-#' @export
 #'
 #' @return the Hamming distance between str1 and str2
 hammingDistance <- function(str1, str2, k) {
