@@ -39,6 +39,8 @@ As well as the following functions for plotting and visualizing the results
 -   `plotPairwiseDist`: plot pairwise distance matrix as a heatmap
 -   `plotDistanceCorrelation`: plot the pairwise distance in the distance matrix against the pairwise distance on the given phylogenetic tree
 
+![](images/alfa-graphic-abstract.png)
+
 ## Contributions
 
 This package is developed by Kevin Gao. The idea of using count vectors for distance calculation is common for alignment-free analysis but the initial inspiration was from Zielezinski et al. The algorithm used for computing the standardized Euclidean distance was based on the paper `A Measure of DNA Sequence Dissimilarity Based on Mahalanobis Distance between Frequencies of Words` by Wu, Burke, and Davison. Moreover, various functions in this package including the tree constructing functions and plotting functions relied on `ape` by Paradis and Schliep. The package also uses functions from the `stats` package for computation.
