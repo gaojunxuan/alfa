@@ -127,10 +127,6 @@ fastStdEuclideanDistance <- function(countVec1, countVec2, str1Len, str2Len,
   return(dst)
 }
 
-normCompressionDistance <- function(str1, str2, k) {
-
-}
-
 #' Calculate the Hamming distance of the two strings
 #' (i.e. mean(count vector of str1 != count vector of str2))
 #'

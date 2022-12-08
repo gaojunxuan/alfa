@@ -1,6 +1,5 @@
 library(shiny)
 
-k <- 1
 maxK <- 10
 
 # Define UI for random distribution app ----
@@ -25,7 +24,8 @@ ui <- fluidPage(
 
     # Sidebar panel for inputs ----
     sidebarPanel(
-
+      tags$p("The file should be a FASTA file containing more than one
+             possibly biologically related sequences."),
       fileInput("file", "Choose FASTA File",
                 multiple = FALSE,
                 accept = c(".txt",

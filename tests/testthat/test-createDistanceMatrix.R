@@ -12,3 +12,7 @@ test_that("createDistanceMatrix fails", {
   testStringSet <- Biostrings::DNAStringSet(c("AAA","ATT","ATC"))
   expect_error(alfa::createDistanceMatrix(testStringSet, k=10))
 })
+
+test_that("createDistanceMatrix fails on incorrect input type", {
+  expect_error(alfa::createDistanceMatrix(c("AAA", "ATT", "ATC"), k=10))
+})

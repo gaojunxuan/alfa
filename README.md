@@ -69,6 +69,9 @@ R Core Team (2021). R: A language and environment for statistical computing. R F
   
 H Wickham, J Hester, W Chang and J Bryan (2022). devtools: Tools to Make Developing R Packages Easier. R package version 2.4.5.
   https://CRAN.R-project.org/package=devtools
+  
+W Chang, J Cheng, JJ Allaire, C Sievert, B Schloerke, Y Xie, J Allen, J McPherson, A Dipert and B Borges (2022).
+  shiny: Web Application Framework for R. R package version 1.7.2. https://CRAN.R-project.org/package=shiny
 
 ## Acknowledgement
 
