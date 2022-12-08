@@ -4,9 +4,13 @@
 #' @param filepath path to the FASTA file to be imported
 #'
 #' @examples
-#' alfa::readFASTA("inst/extdata/usflu.fasta")
+#' download.file(paste0("https://raw.githubusercontent.com/gaojunxuan/",
+#'                      "alfa/main/inst/extdata/usflu.fasta"), "usaflu.fasta")
+#' alfa::readFASTA("usaflu.fasta")
 #'
 #' @return a DNAStringSet object
+#'
+#' @importFrom Biostrings readDNAStringSet
 #'
 #' @export
 readFASTA <- function(filepath) {
@@ -36,8 +40,6 @@ readFASTA <- function(filepath) {
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
 #' woodmouseSet <- Biostrings::DNAStringSet(unlist(woodmouse))
 #' alfa::createDistanceMatrix(woodmouseSet, metric = "euclidean")
-#'
-#' @import Biostrings
 #'
 #' @export
 createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
@@ -109,8 +111,6 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
 #' woodmouseSet <- Biostrings::DNAStringSet(unlist(woodmouse))
 #' alfa::plotPairwiseDist(woodmouseSet, metric = "euclidean")
-#'
-#' @import Biostrings
 #'
 #' @export
 plotPairwiseDist <- function(dnaSet, metric = "euclidean", k = 10, ...) {

@@ -16,11 +16,22 @@ fastStdEuclideanDistance(
 )
 }
 \arguments{
+\item{countVec1}{count vector for the first string to be tested, generated
+by countVectors()}
+
+\item{countVec2}{count vector for the second string to be tested, generated
+by countVectors()}
+
+\item{str1Len}{length of the first string}
+
+\item{str2Len}{length of the second string}
+
+\item{words}{word factors that is the union of all possible k-mers from str1
+and str2}
+
+\item{overlapCap}{overlapping capability of each k-mer}
+
 \item{k}{size of k-mers}
-
-\item{str1}{the first string}
-
-\item{str2}{the second string}
 }
 \value{
 the standardized Euclidean distance between str1 and str2

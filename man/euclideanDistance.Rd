@@ -8,9 +8,9 @@ strings}
 euclideanDistance(str1, str2, k)
 }
 \arguments{
-\item{str1}{the first string}
+\item{str1}{a character vector specifying the first string to be tested}
 
-\item{str2}{the second string}
+\item{str2}{a character vector specifying the second string to be tested}
 
 \item{k}{size of k-mers}
 }

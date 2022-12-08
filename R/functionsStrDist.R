@@ -6,6 +6,8 @@
 #' @examples
 #' alfa::allKMers("ATGTGAC", 3)
 #'
+#'
+#' @importFrom stringr str_length
 #' @export
 #'
 #' @return A string vector containing all k-mers
@@ -46,8 +48,8 @@ countVectors <- function(str1, str2, k) {
 #' Calculate the Euclidean distance between two
 #' strings
 #'
-#' @param str1 the first string
-#' @param str2 the second string
+#' @param str1 a character vector specifying the first string to be tested
+#' @param str2 a character vector specifying the second string to be tested
 #' @param k size of k-mers
 #'
 #' @return the Euclidean distance between str1 and str2
@@ -110,8 +112,15 @@ standardizedEuclidean <- function(str1, str2, k) {
 #' Calculate the standardized Euclidean distance between two
 #' strings normalized by dividing by the standard deviation
 #'
-#' @param str1 the first string
-#' @param str2 the second string
+#' @param countVec1 count vector for the first string to be tested, generated
+#' by countVectors()
+#' @param countVec2 count vector for the second string to be tested, generated
+#' by countVectors()
+#' @param str1Len length of the first string
+#' @param str2Len length of the second string
+#' @param words word factors that is the union of all possible k-mers from str1
+#' and str2
+#' @param overlapCap overlapping capability of each k-mer
 #' @param k size of k-mers
 #'
 #' @return the standardized Euclidean distance between str1 and str2
@@ -130,8 +139,8 @@ fastStdEuclideanDistance <- function(countVec1, countVec2, str1Len, str2Len,
 #' Calculate the Hamming distance of the two strings
 #' (i.e. mean(count vector of str1 != count vector of str2))
 #'
-#' @param str1 the first string
-#' @param str2 the second string
+#' @param str1 a character vector specifying the first string to be tested
+#' @param str2 a character vector specifying the second string to be tested
 #' @param k size of k-mers
 #'
 #' @return the Hamming distance between str1 and str2

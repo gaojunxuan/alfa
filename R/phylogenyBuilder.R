@@ -22,7 +22,8 @@
 #' Paradis E, Schliep K (2019). “ape 5.0: an environment for modern
 #' phylogenetics and evolutionary analyses in R.” Bioinformatics, 35, 526-528.
 #'
-#' @import ape
+#' @importFrom ape bionj
+#'
 #' @export
 neighborJoiningTree <- function(distMat, ...) {
   njTree <- ape::bionj(distMat)
@@ -51,7 +52,8 @@ neighborJoiningTree <- function(distMat, ...) {
 #' Paradis E, Schliep K (2019). “ape 5.0: an environment for modern
 #' phylogenetics and evolutionary analyses in R.” Bioinformatics, 35, 526-528.
 #'
-#' @import ape
+#' @importFrom ape as.phylo
+#'
 #' @export
 upgmaTree <- function(distMat, ...) {
   cluster <- ape::as.phylo(hclust(as.dist(distMat),

@@ -18,6 +18,8 @@ Read FASTA file into a DNAStringSet object to be processed by other
 functions.
 }
 \examples{
-alfa::readFASTA("inst/extdata/usflu.fasta")
+download.file(paste0("https://raw.githubusercontent.com/gaojunxuan/",
+                     "alfa/main/inst/extdata/usflu.fasta"), "usaflu.fasta")
+alfa::readFASTA("usaflu.fasta")
 
 }

@@ -17,7 +17,8 @@ Imports:
     ape,
     Biostrings,
     shiny,
-    stats
+    stats,
+    stringr
 Suggests: 
     knitr,
     rmarkdown,
