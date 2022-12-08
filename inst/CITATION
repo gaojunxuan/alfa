@@ -1,0 +1,13 @@
+citHeader("To cite alfa in publications use:")
+
+citEntry(
+  entry    = "Unpublished",
+  title    = "alfa: An alignment-free sequence analysis tool in R",
+  author   = "Kevin J Gao",
+  year     = 2022,
+  url      = "https://github.com/gaojunxuan/alfa",
+  note     = "Unpublished course project",
+  textVersion = paste(
+    "Gao, K.J. (2022) alfa: An alignment-free sequence analysis tool in R. Unpublished"
+  )
+)

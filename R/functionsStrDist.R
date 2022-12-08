@@ -61,7 +61,7 @@ countVectors <- function(str1, str2, k) {
 #'
 #' @export
 euclideanDistance <- function(str1, str2, k) {
-  vecs <- alfa::countVectors(str1, str2, k)
+  vecs <- countVectors(str1, str2, k)
   stopifnot(length(vecs) == 2)
   str1Count <- vecs$first
   str2Count <- vecs$second
@@ -99,7 +99,7 @@ fastEuclideanDistance <- function(countVec1, countVec2) {
 #'
 #' @export
 standardizedEuclidean <- function(str1, str2, k) {
-  vecs <- alfa::standardizedFreq(str1, str2, k)
+  vecs <- standardizedFreq(str1, str2, k)
   stopifnot(length(vecs) == 2)
   str1Freq <- vecs$first
   str2Freq <- vecs$second

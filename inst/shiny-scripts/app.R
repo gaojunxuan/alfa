@@ -1,12 +1,24 @@
 library(shiny)
 
 k <- 1
+maxK <- 10
 
 # Define UI for random distribution app ----
 ui <- fluidPage(
 
   # App title ----
   titlePanel("alfa - Alignment-free analysis tool"),
+  tags$p("alfa is an R package that allows for alignment-free comparative
+         genomic analysis. It uses standard distance functions including
+         Euclidean distance and standardized Euclidean distance to compute
+         the distance between sequences instead of aligning them using
+         dynamic programming. You can upload you sequence file in FASTA format
+         and analyze it using alfa. A sample data can be found at
+         https://raw.githubusercontent.com/gaojunxuan/alfa/main/inst/extdata/usflu.fasta
+
+         You have to use standardized Euclidean distance for the example dataset
+         because the pairwise distance would otherwise be too big to construct
+         a phylogenetic tree using neighbor joining."),
 
   # Sidebar layout with input and output definitions ----
   sidebarLayout(
@@ -23,7 +35,11 @@ ui <- fluidPage(
       # Input: Select the random distribution type ----
       radioButtons("dist", "Distance function:",
                    c("Euclidean" = "euclidean",
-                     "Standardized Euclidean" = "stdEuclidean")),
+                     "Standardized Euclidean" = "standardizedEuclidean")),
+
+      radioButtons("phyloAlgo", "Phylogenetic tree construction method:",
+                   c("UPGMA" = "upgma",
+                     "Neighbor-joining" = "nj")),
 
       # br() element to introduce extra vertical spacing ----
       br(),
@@ -33,7 +49,7 @@ ui <- fluidPage(
                   "k-mer size:",
                   value = 5,
                   min = 1,
-                  max = 100),
+                  max = maxK),
       actionButton("submitBtn", "Submit job")
 
     ),
@@ -44,7 +60,7 @@ ui <- fluidPage(
       # Output: Tabset w/ plot, summary, and table ----
       tabsetPanel(type = "tabs",
                   tabPanel("Plot", plotOutput("plot")),
-                  tabPanel("Phylogenetic Tree", verbatimTextOutput("phylo")),
+                  tabPanel("Phylogenetic Tree", plotOutput("phylo")),
                   tabPanel("Pairwise Distance Matrix", tableOutput("mat"))
       )
 
@@ -59,50 +75,53 @@ server <- function(input, output) {
   # This is called whenever the inputs change. The output functions
   # defined below then use the value computed from this expression
 
-  req(input$file)
-  req(input$dist)
-  req(input$k)
-
-  observeEvent(input$submitBtn, {
+  submitJob <- observeEvent(input$submitBtn, {
     # submit job
-
-  })
-
-
-
-  d <- reactive({
+    req(input$file)
+    file <- input$file
+    dnaSet <- alfa::readFASTA(file$datapath)
+    seqLen <- max(stringr::str_length(dnaSet))
+    maxK <- seqLen
     dist <- switch(input$dist,
-                   norm = rnorm,
-                   unif = runif,
-                   lnorm = rlnorm,
-                   exp = rexp,
-                   rnorm)
+                   euclidean = "euclidean",
+                   standardizedEuclidean = "standardizedEuclidean",
+                   "euclidean")
 
-    dist(input$n)
+    distMat <- alfa::createDistanceMatrix(dnaSet, dist, k)
+    output$plot <- renderPlot({
+      if (exists("distMat") && !is.null(distMat)) {
+        heatmap(distMat)
+      }
+    })
+
+    output$mat <- renderTable({
+      if (exists("distMat") && !is.null(distMat)) {
+        distMat
+      }
+    })
+
+    output$phylo <- renderPlot({
+      if (exists("distMat") && !is.null(distMat)) {
+        if (input$phyloAlgo == "nj") {
+          alfa::neighborJoiningTree(distMat)
+        } else {
+          alfa::upgmaTree(distMat)
+        }
+      }
+    })
   })
 
-  # Generate a plot of the data ----
-  # Also uses the inputs to build the plot label. Note that the
-  # dependencies on the inputs and the data reactive expression are
-  # both tracked, and all expressions are called in the sequence
-  # implied by the dependency graph.
-  output$plot <- renderPlot({
-    dist <- input$dist
-    n <- input$n
-
-    hist(d(),
-         main = paste("r", dist, "(", n, ")", sep = ""),
-         col = "#75AADB", border = "white")
-  })
-
-  # Generate a summary of the data ----
-  output$summary <- renderPrint({
-    summary(d())
-  })
-
-  # Generate an HTML table view of the data ----
-  output$table <- renderTable({
-    d()
+  # update max k value based on max sequence length of input
+  updateMaxK <- observeEvent(input$file, {
+    file <- input$file
+    dnaSet <- alfa::readFASTA(file$datapath)
+    seqLen <- max(stringr::str_length(dnaSet))
+    maxK <- seqLen
+    updateNumericInput(getDefaultReactiveDomain(), "k",
+                       "k-mer size:",
+                       value = 5,
+                       min = 1,
+                       max = maxK)
   })
 
 }

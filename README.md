@@ -17,7 +17,16 @@ You can install the development version of alfa from [GitHub](https://github.com
 ``` r
 require("devtools")
 devtools::install_github("gaojunxuan/alfa", build_vignettes = TRUE)
+# intall Biostrings from Bioconductor
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("Biostrings")
 library("alfa")
+```
+
+To run the shiny app
+``` r
+alfa::runAlfa()
 ```
 
 ## Overview

@@ -66,7 +66,7 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
   }
   # compute overlapping capability for stdEuclidean
   if (metric == "standardizedEuclidean") {
-    overlapCap <- lapply(levs, alfa::overlapCapability)
+    overlapCap <- lapply(levs, overlapCapability)
   }
   for (r in 1:nrow(pairs)) {
     idx1 <- pairs[r, 1]
