@@ -39,7 +39,7 @@ As well as the following functions for plotting and visualizing the results
 -   `plotPairwiseDist`: plot pairwise distance matrix as a heatmap
 -   `plotDistanceCorrelation`: plot the pairwise distance in the distance matrix against the pairwise distance on the given phylogenetic tree
 
-![](images/alfa-graphic-abstract.png)
+![](inst/extdata/alfa-graphic-abstract.png)
 
 ## Contributions
 
@@ -54,6 +54,12 @@ Zielezinski, A., Vinga, S., Almeida, J. et al. Alignment-free sequence compariso
 Paradis E, Schliep K. "ape 5.0: an environment for modern phylogenetics and evolutionary analyses in R." Bioinformatics. 2019; 35:526-528.
 
 N Saitou, M Nei, The neighbor-joining method: a new method for reconstructing phylogenetic trees., Molecular Biology and Evolution. 1987 Jul; 4(4), 406--425.
+
+R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL
+  https://www.R-project.org/.
+  
+H Wickham, J Hester, W Chang and J Bryan (2022). devtools: Tools to Make Developing R Packages Easier. R package version 2.4.5.
+  https://CRAN.R-project.org/package=devtools
 
 ## Acknowledgement
 

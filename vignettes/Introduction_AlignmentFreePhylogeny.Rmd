@@ -30,7 +30,7 @@ library(alfa)
 
 ## Methods and Theory
 
-Most alignment-free methods rely on k-mer counting. A k-mer of a sequence is a continuous substring of length k. Given a string of length \$n\$, there are $n-k+1$ k-mers. For each sequence, we collect all the k-mers to form a k-mer counting vector. Then, we compare the vectors using different distance measures, which allows us to indirectly compare the sequences without explicitly aligning them.
+Most alignment-free methods rely on k-mer counting. A k-mer of a sequence is a continuous substring of length k. Given a string of length $n$ there are $n-k+1$ k-mers. For each sequence, we collect all the k-mers to form a k-mer counting vector. Then, we compare the vectors using different distance measures, which allows us to indirectly compare the sequences without explicitly aligning them.
 
 To get all k-mers of a given string, we call:
 
@@ -104,3 +104,7 @@ plotDistanceCorrelation(woodmouseDistMat, njtree)
 ```
 
 Note that although in this example we used the phylogenetic tree constructed from the matrix, the second parameter can be any phylogenetic tree. It can be a phylogenetic tree constructed using character-based and alignment-based methods. Doing so helps us better evaluate the power and limitations of alignment-free methods and different metrics.
+
+```{r}
+sessionInfo()
+```

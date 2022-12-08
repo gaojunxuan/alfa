@@ -17,3 +17,7 @@ A string vector containing all k-mers
 \description{
 Extract all k-mers of the given string
 }
+\examples{
+alfa::allKMers("ATGTGAC", 3)
+
+}

@@ -16,6 +16,7 @@ LazyData: true
 Imports: 
     ape,
     Biostrings,
+    shiny,
     stats
 Suggests: 
     knitr,

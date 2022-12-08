@@ -2,9 +2,7 @@
 % Please edit documentation in R/phylogenyBuilder.R
 \name{neighborJoiningTree}
 \alias{neighborJoiningTree}
-\title{Construct phylogenetic tree using the neighbor-joining algorithm.
-This function currently uses the function \code{nj} of the package \code{ape} to
-build the tree internally.}
+\title{Construct phylogenetic tree using the neighbor-joining algorithm.}
 \usage{
 neighborJoiningTree(distMat, ...)
 }
@@ -17,12 +15,12 @@ neighborJoiningTree(distMat, ...)
 a phylogenetic tree object
 }
 \description{
-Construct phylogenetic tree using the neighbor-joining algorithm.
 This function currently uses the function \code{nj} of the package \code{ape} to
 build the tree internally.
 }
 \examples{
 library("ape")
+data("woodmouse")
 woodmouse <- as.list(woodmouse)
 woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 woodmouse <- lapply(woodmouse, paste0, collapse = "")

@@ -1,4 +1,5 @@
 #' Construct phylogenetic tree using the neighbor-joining algorithm.
+#'
 #' This function currently uses the function `nj` of the package `ape` to
 #' build the tree internally.
 #'
@@ -9,7 +10,7 @@
 #'
 #' @examples
 #' library("ape")
-# 'data("woodmouse")
+#' data("woodmouse")
 #' woodmouse <- as.list(woodmouse)
 #' woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
@@ -21,6 +22,7 @@
 #' Paradis E, Schliep K (2019). “ape 5.0: an environment for modern
 #' phylogenetics and evolutionary analyses in R.” Bioinformatics, 35, 526-528.
 #'
+#' @import ape
 #' @export
 neighborJoiningTree <- function(distMat, ...) {
   njTree <- ape::bionj(distMat)
@@ -37,7 +39,7 @@ neighborJoiningTree <- function(distMat, ...) {
 #'
 #' @examples
 #' library("ape")
-# 'data("woodmouse")
+#' data("woodmouse")
 #' woodmouse <- as.list(woodmouse)
 #' woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
@@ -49,6 +51,7 @@ neighborJoiningTree <- function(distMat, ...) {
 #' Paradis E, Schliep K (2019). “ape 5.0: an environment for modern
 #' phylogenetics and evolutionary analyses in R.” Bioinformatics, 35, 526-528.
 #'
+#' @import ape
 #' @export
 upgmaTree <- function(distMat, ...) {
   cluster <- ape::as.phylo(hclust(as.dist(distMat),
@@ -70,7 +73,7 @@ upgmaTree <- function(distMat, ...) {
 #'
 #' @examples
 #' library("ape")
-# 'data("woodmouse")
+#' data("woodmouse")
 #' woodmouse <- as.list(woodmouse)
 #' woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")

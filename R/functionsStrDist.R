@@ -3,6 +3,9 @@
 #' @param str The string to extract k-mers from
 #' @param k Size of each k-mer
 #'
+#' @examples
+#' alfa::allKMers("ATGTGAC", 3)
+#'
 #' @export
 #'
 #' @return A string vector containing all k-mers
@@ -18,8 +21,8 @@ allKMers <- function(str, k) {
 
 #' Create a count vector of k-mers in the two strings
 #'
-#' @param str1 the first string
-#' @param str2 the second string
+#' @param str1 a character vector specifying the first string to be tested
+#' @param str2 a character vector specifying the second string to be tested
 #' @param k size of k-mer
 #'
 #' @return a list containing two count vectors
@@ -118,8 +121,8 @@ fastStdEuclideanDistance <- function(countVec1, countVec2, str1Len, str2Len,
   freqs2 <- countVec2 / sum(countVec2)
   # var1 <- vector(length = length(freqs1))
   # var2 <- vector(length = length(freqs2))
-  var1 <- lapply(overlapCap, alfa::freqVariance, seqLen = str1Len, wordLen = k)
-  var2 <- lapply(overlapCap, alfa::freqVariance, seqLen = str2Len, wordLen = k)
+  var1 <- lapply(overlapCap, freqVariance, seqLen = str1Len, wordLen = k)
+  var2 <- lapply(overlapCap, freqVariance, seqLen = str2Len, wordLen = k)
   dst <- dist(rbind(freqs1 / unlist(var1), freqs2 / unlist(var2)))[1]
   return(dst)
 }
@@ -137,7 +140,7 @@ normCompressionDistance <- function(str1, str2, k) {
 #'
 #' @return the Hamming distance between str1 and str2
 hammingDistance <- function(str1, str2, k) {
-  vecs <- alfa::countVectors(str1, str2, k)
+  vecs <- countVectors(str1, str2, k)
   stopifnot(length(vecs) == 2)
   str1Count <- vecs$first
   str2Count <- vecs$second

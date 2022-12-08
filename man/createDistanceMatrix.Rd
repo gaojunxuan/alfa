@@ -25,6 +25,7 @@ the type DNAStringSet and AAStringSet over any well-defined alphabet
 }
 \examples{
 library("ape")
+data("woodmouse")
 woodmouse <- as.list(woodmouse)
 woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 woodmouse <- lapply(woodmouse, paste0, collapse = "")

@@ -17,3 +17,7 @@ a DNAStringSet object
 Read FASTA file into a DNAStringSet object to be processed by other
 functions.
 }
+\examples{
+alfa::readFASTA("inst/extdata/usflu.fasta")
+
+}

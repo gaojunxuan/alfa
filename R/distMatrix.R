@@ -3,7 +3,11 @@
 #'
 #' @param filepath path to the FASTA file to be imported
 #'
+#' @examples
+#' alfa::readFASTA("inst/extdata/usflu.fasta")
+#'
 #' @return a DNAStringSet object
+#'
 #' @export
 readFASTA <- function(filepath) {
   s <- Biostrings::readDNAStringSet(filepath)
@@ -26,12 +30,14 @@ readFASTA <- function(filepath) {
 #'
 #' @examples
 #' library("ape")
-# 'data("woodmouse")
+#' data("woodmouse")
 #' woodmouse <- as.list(woodmouse)
 #' woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
 #' woodmouseSet <- Biostrings::DNAStringSet(unlist(woodmouse))
 #' alfa::createDistanceMatrix(woodmouseSet, metric = "euclidean")
+#'
+#' @import Biostrings
 #'
 #' @export
 createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
@@ -49,7 +55,7 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
   kmers <- list()
   levs <- c()
   for (i in 1:dnaSetSize) {
-    kmer <- alfa::allKMers(as.character(dnaSet[i]), k)
+    kmer <- allKMers(as.character(dnaSet[i]), k)
     levs <- union(levs, kmer)
     kmers[[i]] <- kmer
   }
@@ -59,15 +65,17 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
     kmerCounts[i,] <- table(factor(kmers[[i]], levs))
   }
   # compute overlapping capability for stdEuclidean
-  if (metric == "standardizedEuclidean")
+  if (metric == "standardizedEuclidean") {
     overlapCap <- lapply(levs, alfa::overlapCapability)
+  }
   for (r in 1:nrow(pairs)) {
     idx1 <- pairs[r, 1]
     idx2 <- pairs[r, 2]
-    if (metric == "euclidean")
-      dist <- alfa::fastEuclideanDistance(kmerCounts[idx1,], kmerCounts[idx2,])
+    if (metric == "euclidean") {
+      dist <- fastEuclideanDistance(kmerCounts[idx1,], kmerCounts[idx2,])
+    }
     else if (metric == "standardizedEuclidean") {
-      dist <- alfa::fastStdEuclideanDistance(kmerCounts[idx1,],
+      dist <- fastStdEuclideanDistance(kmerCounts[idx1,],
                                              kmerCounts[idx2,],
                                              stringr::str_length(dnaSet[idx1]),
                                              stringr::str_length(dnaSet[idx2]),
@@ -76,8 +84,9 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
                                              k)
     }
     # not a supported metric
-    else
+    else {
       return(NA)
+    }
     stopifnot(!is.na(dist))
     distMat[idx1, idx2] <- dist
     distMat[idx2, idx1] <- dist
@@ -94,15 +103,17 @@ createDistanceMatrix <- function(dnaSet, metric = "euclidean", k = 10) {
 #'
 #' @examples
 #' library("ape")
-# 'data("woodmouse")
+#' data("woodmouse")
 #' woodmouse <- as.list(woodmouse)
 #' woodmouse <- lapply(woodmouse, ape::as.character.DNAbin)
 #' woodmouse <- lapply(woodmouse, paste0, collapse = "")
 #' woodmouseSet <- Biostrings::DNAStringSet(unlist(woodmouse))
 #' alfa::plotPairwiseDist(woodmouseSet, metric = "euclidean")
 #'
+#' @import Biostrings
+#'
 #' @export
 plotPairwiseDist <- function(dnaSet, metric = "euclidean", k = 10, ...) {
-  distMat <- alfa::createDistanceMatrix(dnaSet, metric, k)
+  distMat <- createDistanceMatrix(dnaSet, metric, k)
   heatmap(distMat, ...)
 }
